@@ -3,10 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Best Friend Mood Generator 💖</title>
+  <title>Best Friend Mood App 💖</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      background: linear-gradient(to right, #fff0f5, #ffe0e0);
+      background: linear-gradient(to right, #ffe0ec, #ffe8e8);
       font-family: 'Segoe UI', sans-serif;
       display: flex;
       justify-content: center;
@@ -15,7 +19,11 @@
       margin: 0;
     }
 
-    .container {
+    .hidden {
+      display: none;
+    }
+
+    .container, .login-container {
       background: white;
       padding: 30px 40px;
       border-radius: 15px;
@@ -30,7 +38,7 @@
       margin-bottom: 20px;
     }
 
-    select, button, textarea {
+    select, button, textarea, input {
       margin: 10px;
       padding: 10px 15px;
       font-size: 1rem;
@@ -78,11 +86,27 @@
     audio {
       width: 90%;
     }
+
+    .error {
+      color: red;
+      font-size: 0.9rem;
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Hey Bestie! What’s Your Mood? 🎭</h1>
+  <!-- LOGIN PAGE -->
+  <div class="login-container" id="loginPage">
+    <h1>Welcome Bestie! 💕</h1>
+    <p>Please log in to continue</p>
+    <input type="text" id="username" placeholder="Enter your name or email" /><br>
+    <input type="password" id="password" placeholder="Enter password" /><br>
+    <button onclick="login()">🔐 Login</button>
+    <p class="error" id="loginError"></p>
+  </div>
+
+  <!-- MAIN APP -->
+  <div class="container hidden" id="mainApp">
+    <h1>Hey <span id="userNameDisplay">Bestie</span>! What’s Your Mood? 🎭</h1>
 
     <label for="mood">Select Mood:</label><br>
     <select id="mood">
@@ -122,6 +146,30 @@
   </div>
 
   <script>
+    // Dummy login check (replace with real validation if needed)
+    const loginData = {
+      username: "bestie",
+      password: "1234"
+    };
+
+    function login() {
+      const enteredUsername = document.getElementById("username").value.trim().toLowerCase();
+      const enteredPassword = document.getElementById("password").value;
+
+      if (enteredUsername && enteredPassword) {
+        // Simple check — you can modify this logic
+        if (enteredPassword === loginData.password) {
+          document.getElementById("loginPage").classList.add("hidden");
+          document.getElementById("mainApp").classList.remove("hidden");
+          document.getElementById("userNameDisplay").textContent = enteredUsername;
+        } else {
+          document.getElementById("loginError").textContent = "❌ Wrong password. Try again.";
+        }
+      } else {
+        document.getElementById("loginError").textContent = "Please enter both fields!";
+      }
+    }
+
     const data = {
       happy: {
         shayari: [
