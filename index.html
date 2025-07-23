@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Best Friend Mood Generator 💖</title>
+  <style>
+    body {
+      background: linear-gradient(to right, #fff0f5, #ffe0e0);
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: white;
+      padding: 30px 40px;
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      text-align: center;
+      max-width: 700px;
+      width: 95%;
+    }
+
+    h1 {
+      color: #e91e63;
+      margin-bottom: 20px;
+    }
+
+    select, button, textarea {
+      margin: 10px;
+      padding: 10px 15px;
+      font-size: 1rem;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      outline: none;
+      width: 90%;
+      max-width: 400px;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 60px;
+    }
+
+    button {
+      background-color: #e91e63;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #c2185b;
+    }
+
+    .output {
+      margin-top: 20px;
+      font-size: 1.2rem;
+      color: #333;
+      white-space: pre-line;
+      min-height: 100px;
+    }
+
+    .emoji {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .audio-controls {
+      margin-top: 15px;
+    }
+
+    audio {
+      width: 90%;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Hey Bestie! What’s Your Mood? 🎭</h1>
+
+    <label for="mood">Select Mood:</label><br>
+    <select id="mood">
+      <option value="happy">Happy 😊</option>
+      <option value="sad">Sad 😢</option>
+      <option value="romantic">Romantic ❤️</option>
+      <option value="motivated">Motivated 💪</option>
+      <option value="funny">Funny 😂</option>
+    </select><br>
+
+    <label for="type">Select Type:</label><br>
+    <select id="type">
+      <option value="shayari">Shayari</option>
+      <option value="poem">Poem</option>
+      <option value="joke">Joke</option>
+    </select><br>
+
+    <button onclick="generateContent()">🎁 Generate</button>
+
+    <div class="output" id="outputDisplay">Choose your mood and type to begin!</div>
+
+    <div class="emoji" id="emojiDisplay">🎉</div>
+
+    <button onclick="speakOutput()">🔊 Speak Aloud</button>
+
+    <h3>Add Your Own (Optional):</h3>
+    <textarea id="customText" placeholder="Write your own Shayari, Poem or Joke..."></textarea>
+    <button onclick="addCustom()">➕ Add to Collection</button>
+
+    <div class="audio-controls">
+      <h4>🎶 Background Music</h4>
+      <audio controls autoplay loop>
+        <source src="https://www.bensound.com/bensound-music/bensound-sunny.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+  </div>
+
+  <script>
+    const data = {
+      happy: {
+        shayari: [
+          "Masti bhare lamhe ho tumhare,\nHar khushi mein ho tumhare saath mere.",
+          "Zindagi muskurane ka naam hai,\nAur tu meri khushi ka paighaam hai!"
+        ],
+        poem: [
+          "Sunshine in your smile I see,\nHappy moments you share with me.",
+          "Laughter echoes in your voice,\nYou make even silence rejoice."
+        ],
+        joke: [
+          "Friend: Exam kaisa gaya?\nMe: Paper to white tha, ink main bhar aaya!",
+          "Why don’t scientists trust atoms?\nBecause they make up everything!"
+        ]
+      },
+      sad: {
+        shayari: [
+          "Tanhaai mein yaad teri aati hai,\nHar pal teri kami satati hai.",
+          "Aansu bhi keh rahe hain ab toh,\nUs dard ko chhod de jo chala gaya."
+        ],
+        poem: [
+          "Silent tears, hidden fears,\nLost in time, fading years.",
+          "Even stars feel far tonight,\nLoneliness dims every light."
+        ],
+        joke: [
+          "Sad but true: WiFi signals are stronger than relationships today.",
+          "Mujhe us waqt ka intezaar hai,\nJab net slow ho aur tum yaad aao 😢📶"
+        ]
+      },
+      romantic: {
+        shayari: [
+          "Tera naam mere labon pe aise aata hai,\nJaise dua mein rab ka paighaam aata hai.",
+          "Tujh se milke zindagi se pyar ho gaya,\nTera muskuraana mere jeene ka asar ho gaya."
+        ],
+        poem: [
+          "In your eyes, I see the stars,\nIn your arms, I've traveled far.",
+          "Love is not just a word we say,\nIt’s how I breathe every day."
+        ],
+        joke: [
+          "She: Main tumhare bina mar jaungi!\nHe: Pehle battery charge kar lo 😅❤️",
+          "Roses are red, violets are blue,\nYou stole my fries, so I’m mad at you!"
+        ]
+      },
+      motivated: {
+        shayari: [
+          "Manzil milegi, bhatak kar hi sahi,\nGumrah toh wo hain jo ghar se nikle hi nahi.",
+          "Har andhera roshan hoga,\nBas hausla zaroori hai."
+        ],
+        poem: [
+          "Rise and shine, break all chains,\nLet your courage light the lanes.",
+          "Dreams are wings, don’t fear the sky,\nYou were born to soar, to fly!"
+        ],
+        joke: [
+          "Success tip: Study like you’re dating your notes!",
+          "Motivation ka kya karein?\nJab tak chai na mile – kuch na karein! ☕"
+        ]
+      },
+      funny: {
+        shayari: [
+          "Dost ke jokes aise hote hain,\nNa hanso toh insult hoti hai!",
+          "Hasna hai toh aajaa,\nMera dost pagal banata hi rahega!"
+        ],
+        poem: [
+          "Tickle my ribs, I laugh till I fall,\nFriends like you – best gift of all!",
+          "Life is serious, that’s the rule,\nBut with you, I act the fool!"
+        ],
+        joke: [
+          "Teacher: Why are you late?\nStudent: Alarm ka mood off tha 😂",
+          "Pyar andha hota hai,\nPar jokes bina kaam ke nahi hote!"
+        ]
+      }
+    };
+
+    function generateContent() {
+      const mood = document.getElementById("mood").value;
+      const type = document.getElementById("type").value;
+      const items = data[mood][type];
+      const randomItem = items[Math.floor(Math.random() * items.length)];
+      document.getElementById("outputDisplay").innerText = randomItem;
+
+      const emojiMap = {
+        happy: "😊✨🎉",
+        sad: "😢💔🌧️",
+        romantic: "❤️🌹🥰",
+        motivated: "🔥💪🚀",
+        funny: "😂🤣🎭"
+      };
+      document.getElementById("emojiDisplay").innerText = emojiMap[mood];
+    }
+
+    function speakOutput() {
+      const text = document.getElementById("outputDisplay").innerText;
+      if ('speechSynthesis' in window) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = "en-IN";
+        window.speechSynthesis.speak(utterance);
+      } else {
+        alert("Sorry, your browser does not support speech synthesis.");
+      }
+    }
+
+    function addCustom() {
+      const mood = document.getElementById("mood").value;
+      const type = document.getElementById("type").value;
+      const customText = document.getElementById("customText").value.trim();
+      if (customText.length > 0) {
+        data[mood][type].push(customText);
+        alert("🎉 Added to your collection!");
+        document.getElementById("customText").value = "";
+      } else {
+        alert("Please write something to add!");
+      }
+    }
+  </script>
+</body>
+</html>
