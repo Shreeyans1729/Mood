@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Best Friend Mood App 💖</title>
+  <title>SRK Mood App 💖</title>
   <style>
     * {
       box-sizing: border-box;
@@ -99,7 +99,7 @@
   <div class="login-container" id="loginPage">
     <h1>Welcome Bestie! 💕</h1>
     <p>Please log in to continue</p>
-    <input type="text" id="username" placeholder="Enter your name or email" /><br>
+    <input type="text" id="username" placeholder="Enter your name" /><br>
     <input type="password" id="password" placeholder="Enter password" /><br>
     <button onclick="login()">🔐 Login</button>
     <p class="error" id="loginError"></p>
@@ -107,33 +107,23 @@
 
   <!-- MAIN APP -->
   <div class="container hidden" id="mainApp">
-    <h1>Hey <span id="userNameDisplay">Bestie</span>! What’s Your Mood? 🎭</h1>
+    <h1>Hi <span id="userNameDisplay">Bestie</span>! Let SRK set your mood 🎭</h1>
 
     <label for="mood">Select Mood:</label><br>
     <select id="mood">
-      <option value="happy">Happy 😊</option>
-      <option value="sad">Sad 😢</option>
-      <option value="romantic">Romantic ❤️</option>
       <option value="motivated">Motivated 💪</option>
-      <option value="funny">Funny 😂</option>
+      <option value="happy">Happy 😊</option>
     </select><br>
 
-    <label for="type">Select Type:</label><br>
-    <select id="type">
-      <option value="shayari">Shayari</option>
-      <option value="poem">Poem</option>
-      <option value="joke">Joke</option>
-    </select><br>
+    <button onclick="generateContent()">✨ Get SRK Dialogue</button>
 
-    <button onclick="generateContent()">🎁 Generate</button>
-
-    <div class="output" id="outputDisplay">Choose your mood and type to begin!</div>
+    <div class="output" id="outputDisplay">Choose a mood to get started!</div>
     <div class="emoji" id="emojiDisplay">🎉</div>
     <button onclick="speakOutput()">🔊 Speak Aloud</button>
 
-    <h3>Add Your Own (Optional):</h3>
-    <textarea id="customText" placeholder="Write your own SRK-style line..."></textarea>
-    <button onclick="addCustom()">➕ Add to Collection</button>
+    <h3>Add Your Own SRK-Style Line</h3>
+    <textarea id="customText" placeholder="Write your own line..."></textarea>
+    <button onclick="addCustom()">➕ Add Line</button>
 
     <div class="audio-controls">
       <h4>🎶 Background Music</h4>
@@ -147,12 +137,12 @@
   <script>
     const loginData = {
       username: "bestie",
-      password: "Shreeyans aap mahan ho"
+      password: "1234"
     };
 
     function login() {
-      const enteredUsername = document.getElementById("username").value.trim().toLowerCase();
-      const enteredPassword = document.getElementById("password").value;
+      const enteredUsername = document.getElementById("username").value.trim();
+      const enteredPassword = document.getElementById("password").value.trim();
 
       if (enteredUsername && enteredPassword) {
         if (enteredPassword === loginData.password) {
@@ -168,136 +158,42 @@
     }
 
     const data = {
-      happy: {
-        shayari: [
-          "Bade bade deshon mein aisi chhoti chhoti baatein hoti rehti hain, Senorita.",
-          "Picture abhi baaki hai mere dost.",
-          "Don’t underestimate the power of a common man.",
-          "Itni shiddat se maine tumhe paane ki koshish ki hai...",
-          "Pyaar dosti hai!"
-        ],
-        poem: [
-          "Bade bade deshon mein aisi chhoti chhoti baatein hoti rehti hain, Senorita.",
-          "Picture abhi baaki hai mere dost.",
-          "Don’t underestimate the power of a common man.",
-          "Itni shiddat se maine tumhe paane ki koshish ki hai...",
-          "Pyaar dosti hai!"
-        ],
-        joke: [
-          "Bade bade deshon mein aisi chhoti chhoti baatein hoti rehti hain, Senorita.",
-          "Picture abhi baaki hai mere dost.",
-          "Don’t underestimate the power of a common man.",
-          "Itni shiddat se maine tumhe paane ki koshish ki hai...",
-          "Pyaar dosti hai!"
-        ]
-      },
-      sad: {
-        shayari: [
-          "Kabhi kabhi jeetne ke liye kuch haarna padta hai...",
-          "Main tumhare bina jee nahi sakta... aur tumhare saath jee nahi sakta.",
-          "Rishte toot jaaye toh unhe jodne ka koi faayda nahi...",
-          "Tujhe bhool jaaun, yeh ho nahi sakta...",
-          "Jab dil hi toot gaya, toh jee ke kya karenge?"
-        ],
-        poem: [
-          "Kabhi kabhi jeetne ke liye kuch haarna padta hai...",
-          "Main tumhare bina jee nahi sakta... aur tumhare saath jee nahi sakta.",
-          "Rishte toot jaaye toh unhe jodne ka koi faayda nahi...",
-          "Tujhe bhool jaaun, yeh ho nahi sakta...",
-          "Jab dil hi toot gaya, toh jee ke kya karenge?"
-        ],
-        joke: [
-          "Kabhi kabhi jeetne ke liye kuch haarna padta hai...",
-          "Main tumhare bina jee nahi sakta... aur tumhare saath jee nahi sakta.",
-          "Rishte toot jaaye toh unhe jodne ka koi faayda nahi...",
-          "Tujhe bhool jaaun, yeh ho nahi sakta...",
-          "Jab dil hi toot gaya, toh jee ke kya karenge?"
-        ]
-      },
-      romantic: {
-        shayari: [
-          "Palat... palat... palat...",
-          "Kisi cheez ko shiddat se chaho...",
-          "Mujhe toh lagta hai ki main usse kabse pyaar karta hoon...",
-          "Main tumhe itna pyaar karunga... ki tum khud se pyaar karne lagogi.",
-          "Pyaar sirf ek baar hota hai..."
-        ],
-        poem: [
-          "Palat... palat... palat...",
-          "Kisi cheez ko shiddat se chaho...",
-          "Mujhe toh lagta hai ki main usse kabse pyaar karta hoon...",
-          "Main tumhe itna pyaar karunga... ki tum khud se pyaar karne lagogi.",
-          "Pyaar sirf ek baar hota hai..."
-        ],
-        joke: [
-          "Palat... palat... palat...",
-          "Kisi cheez ko shiddat se chaho...",
-          "Mujhe toh lagta hai ki main usse kabse pyaar karta hoon...",
-          "Main tumhe itna pyaar karunga... ki tum khud se pyaar karne lagogi.",
-          "Pyaar sirf ek baar hota hai..."
-        ]
-      },
-      motivated: {
-        shayari: [
-          "Haar ke jeetne wale ko Baazigar kehte hain.",
-          "Don ko pakadna mushkil hi nahi... namumkin hai.",
-          "Success ke peeche mat bhaago...",
-          "Mujhe states ke naam mat batao...",
-          "Main hoon Don."
-        ],
-        poem: [
-          "Haar ke jeetne wale ko Baazigar kehte hain.",
-          "Don ko pakadna mushkil hi nahi... namumkin hai.",
-          "Success ke peeche mat bhaago...",
-          "Mujhe states ke naam mat batao...",
-          "Main hoon Don."
-        ],
-        joke: [
-          "Haar ke jeetne wale ko Baazigar kehte hain.",
-          "Don ko pakadna mushkil hi nahi... namumkin hai.",
-          "Success ke peeche mat bhaago...",
-          "Mujhe states ke naam mat batao...",
-          "Main hoon Don."
-        ]
-      },
-      funny: {
-        shayari: [
-          "Yeh toh bada toing hai.",
-          "Main aisa kyun hoon? Kyunki main ek hero hoon!",
-          "Kaun kambakht bardaasht karne ko peeta hai?",
-          "Mujh par ek ehsaan karna, ki mujh par koi ehsaan na karna.",
-          "Rahul... naam toh suna hoga!"
-        ],
-        poem: [
-          "Yeh toh bada toing hai.",
-          "Main aisa kyun hoon? Kyunki main ek hero hoon!",
-          "Kaun kambakht bardaasht karne ko peeta hai?",
-          "Mujh par ek ehsaan karna, ki mujh par koi ehsaan na karna.",
-          "Rahul... naam toh suna hoga!"
-        ],
-        joke: [
-          "Yeh toh bada toing hai.",
-          "Main aisa kyun hoon? Kyunki main ek hero hoon!",
-          "Kaun kambakht bardaasht karne ko peeta hai?",
-          "Mujh par ek ehsaan karna, ki mujh par koi ehsaan na karna.",
-          "Rahul... naam toh suna hoga!"
-        ]
-      }
+      motivated: [
+        "Don’t be a toy… Be a player!",
+        "Risk lene ka naam hi life hai…",
+        "Agar kisi cheez ko dil se chaaho… toh puri kaynaat use tumse milane ki koshish mein lag jaati hai.",
+        "Har insaan ki life mein 3 log hote hai… Tum teeno mat bano… khud banne do.",
+        "Zindagi mein kuch banna hai, toh kisi ke kandhe pe chadh kar nahi… apne pairon pe chal kar bano!",
+        "Picture abhi baaki hai, mere dost!",
+        "Mushkilein toh aati hai… humein hatana aana chahiye!",
+        "Success ke peeche mat bhago… excellence ka peecha karo, success jhak maarke tumhare peeche ayegi!",
+        "Kabhi kabhi kuch jeetne ke liye kuch haarna bhi padta hai… aur haar kar jeetne waale ko baazigar kehte hain!",
+        "Agar tum sochoge ki tum haar jaoge… toh tum haar jaoge. Agar tum sochoge ki tum jeet jaoge… toh tum jeet jaoge!"
+      ],
+      happy: [
+        "Pyaar dosti hai… Aur main apki sabse achi dost ban’na chahta hoon.",
+        "Ek ladki ko jab tak naa milaaye, woh shaadi nahi karti… Aur ek ladka jab tak shaadi nahi karta, woh ladki ko nahi milaata!",
+        "Kehte hain agar kisi cheez ko dil se chaaho… toh puri kaynaat use tumse milane ki koshish mein lag jaati hai.",
+        "Mohabbat sirf ek baar hoti hai… Baaki sirf yaadein reh jaati hain.",
+        "Tumhari khushi mein meri khushi hai… Bas itna sa khwaab dekhne ka haq dedo.",
+        "Main aaj bhi wahi hoon, jis din tune mujhe chhua tha… Tu bhi wahi hai?",
+        "Har ek ladki ke dil mein ek chhota sa bachha hota hai… Jo sirf ek hi cheez maangta hai… 'Main hoon na!'",
+        "Mohabbat zindagi ki tarah hoti hai… Kabhi khatam nahi hoti.",
+        "Tumhare saath rehkar bhi… Tumse door rehna mushkil ho jaata hai.",
+        "Agar tum mujhse door ho… Toh main saanson ke bina hoon."
+      ]
     };
 
     function generateContent() {
       const mood = document.getElementById("mood").value;
-      const type = document.getElementById("type").value;
-      const items = data[mood][type];
-      const randomItem = items[Math.floor(Math.random() * items.length)];
-      document.getElementById("outputDisplay").innerText = randomItem;
+      const items = data[mood];
+      const randomIndex = Math.floor(Math.random() * items.length);
+      const quote = items[randomIndex];
+      document.getElementById("outputDisplay").innerText = quote;
 
       const emojiMap = {
-        happy: "😊✨🎉",
-        sad: "😢💔🌧️",
-        romantic: "❤️🌹🥰",
-        motivated: "🔥💪🚀",
-        funny: "😂🤣🎭"
+        happy: "😍🌸🎉",
+        motivated: "🔥💪🚀"
       };
       document.getElementById("emojiDisplay").innerText = emojiMap[mood];
     }
@@ -309,17 +205,16 @@
         utterance.lang = "hi-IN";
         window.speechSynthesis.speak(utterance);
       } else {
-        alert("Sorry, your browser does not support speech synthesis.");
+        alert("Your browser doesn't support speech synthesis.");
       }
     }
 
     function addCustom() {
       const mood = document.getElementById("mood").value;
-      const type = document.getElementById("type").value;
       const customText = document.getElementById("customText").value.trim();
       if (customText.length > 0) {
-        data[mood][type].push(customText);
-        alert("🎉 Added to your collection!");
+        data[mood].push(customText);
+        alert("✅ Added to " + mood + " lines!");
         document.getElementById("customText").value = "";
       } else {
         alert("Please write something to add!");
