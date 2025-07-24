@@ -94,9 +94,10 @@
   </style>
 </head>
 <body>
+
   <!-- LOGIN PAGE -->
   <div class="login-container" id="loginPage">
-    <h1>Welcome buddy! 😎💕</h1>
+    <h1>Welcome Bestie! 💕</h1>
     <p>Please log in to continue</p>
     <input type="text" id="username" placeholder="Enter your name or email" /><br>
     <input type="password" id="password" placeholder="Enter password" /><br>
@@ -127,13 +128,11 @@
     <button onclick="generateContent()">🎁 Generate</button>
 
     <div class="output" id="outputDisplay">Choose your mood and type to begin!</div>
-
     <div class="emoji" id="emojiDisplay">🎉</div>
-
     <button onclick="speakOutput()">🔊 Speak Aloud</button>
 
     <h3>Add Your Own (Optional):</h3>
-    <textarea id="customText" placeholder="Write your own Shayari, Poem or Joke..."></textarea>
+    <textarea id="customText" placeholder="Write your own SRK-style line..."></textarea>
     <button onclick="addCustom()">➕ Add to Collection</button>
 
     <div class="audio-controls">
@@ -146,10 +145,9 @@
   </div>
 
   <script>
-    // Dummy login check (replace with real validation if needed)
     const loginData = {
       username: "bestie",
-      password: "Shreeyans aap mahan ho"
+      password: "1234"
     };
 
     function login() {
@@ -157,7 +155,6 @@
       const enteredPassword = document.getElementById("password").value;
 
       if (enteredUsername && enteredPassword) {
-        // Simple check — you can modify this logic
         if (enteredPassword === loginData.password) {
           document.getElementById("loginPage").classList.add("hidden");
           document.getElementById("mainApp").classList.remove("hidden");
@@ -173,72 +170,117 @@
     const data = {
       happy: {
         shayari: [
-          "Masti bhare lamhe ho tumhare,\nHar khushi mein ho tumhare saath mere.",
-          "Zindagi muskurane ka naam hai,\nAur tu meri khushi ka paighaam hai!"
+          "Bade bade deshon mein aisi chhoti chhoti baatein hoti rehti hain, Senorita.",
+          "Picture abhi baaki hai mere dost.",
+          "Don’t underestimate the power of a common man.",
+          "Itni shiddat se maine tumhe paane ki koshish ki hai...",
+          "Pyaar dosti hai!"
         ],
         poem: [
-          "Sunshine in your smile I see,\nHappy moments you share with me.",
-          "Laughter echoes in your voice,\nYou make even silence rejoice."
+          "Bade bade deshon mein aisi chhoti chhoti baatein hoti rehti hain, Senorita.",
+          "Picture abhi baaki hai mere dost.",
+          "Don’t underestimate the power of a common man.",
+          "Itni shiddat se maine tumhe paane ki koshish ki hai...",
+          "Pyaar dosti hai!"
         ],
         joke: [
-          "Friend: Exam kaisa gaya?\nMe: Paper to white tha, ink main bhar aaya!",
-          "Why don’t scientists trust atoms?\nBecause they make up everything!"
+          "Bade bade deshon mein aisi chhoti chhoti baatein hoti rehti hain, Senorita.",
+          "Picture abhi baaki hai mere dost.",
+          "Don’t underestimate the power of a common man.",
+          "Itni shiddat se maine tumhe paane ki koshish ki hai...",
+          "Pyaar dosti hai!"
         ]
       },
       sad: {
         shayari: [
-          "Tanhaai mein yaad teri aati hai,\nHar pal teri kami satati hai.",
-          "Aansu bhi keh rahe hain ab toh,\nUs dard ko chhod de jo chala gaya."
+          "Kabhi kabhi jeetne ke liye kuch haarna padta hai...",
+          "Main tumhare bina jee nahi sakta... aur tumhare saath jee nahi sakta.",
+          "Rishte toot jaaye toh unhe jodne ka koi faayda nahi...",
+          "Tujhe bhool jaaun, yeh ho nahi sakta...",
+          "Jab dil hi toot gaya, toh jee ke kya karenge?"
         ],
         poem: [
-          "Silent tears, hidden fears,\nLost in time, fading years.",
-          "Even stars feel far tonight,\nLoneliness dims every light."
+          "Kabhi kabhi jeetne ke liye kuch haarna padta hai...",
+          "Main tumhare bina jee nahi sakta... aur tumhare saath jee nahi sakta.",
+          "Rishte toot jaaye toh unhe jodne ka koi faayda nahi...",
+          "Tujhe bhool jaaun, yeh ho nahi sakta...",
+          "Jab dil hi toot gaya, toh jee ke kya karenge?"
         ],
         joke: [
-          "Sad but true: WiFi signals are stronger than relationships today.",
-          "Mujhe us waqt ka intezaar hai,\nJab net slow ho aur tum yaad aao 😢📶"
+          "Kabhi kabhi jeetne ke liye kuch haarna padta hai...",
+          "Main tumhare bina jee nahi sakta... aur tumhare saath jee nahi sakta.",
+          "Rishte toot jaaye toh unhe jodne ka koi faayda nahi...",
+          "Tujhe bhool jaaun, yeh ho nahi sakta...",
+          "Jab dil hi toot gaya, toh jee ke kya karenge?"
         ]
       },
       romantic: {
         shayari: [
-          "Tera naam mere labon pe aise aata hai,\nJaise dua mein rab ka paighaam aata hai.",
-          "Tujh se milke zindagi se pyar ho gaya,\nTera muskuraana mere jeene ka asar ho gaya."
+          "Palat... palat... palat...",
+          "Kisi cheez ko shiddat se chaho...",
+          "Mujhe toh lagta hai ki main usse kabse pyaar karta hoon...",
+          "Main tumhe itna pyaar karunga... ki tum khud se pyaar karne lagogi.",
+          "Pyaar sirf ek baar hota hai..."
         ],
         poem: [
-          "In your eyes, I see the stars,\nIn your arms, I've traveled far.",
-          "Love is not just a word we say,\nIt’s how I breathe every day."
+          "Palat... palat... palat...",
+          "Kisi cheez ko shiddat se chaho...",
+          "Mujhe toh lagta hai ki main usse kabse pyaar karta hoon...",
+          "Main tumhe itna pyaar karunga... ki tum khud se pyaar karne lagogi.",
+          "Pyaar sirf ek baar hota hai..."
         ],
         joke: [
-          "She: Main tumhare bina mar jaungi!\nHe: Pehle battery charge kar lo 😅❤️",
-          "Roses are red, violets are blue,\nYou stole my fries, so I’m mad at you!"
+          "Palat... palat... palat...",
+          "Kisi cheez ko shiddat se chaho...",
+          "Mujhe toh lagta hai ki main usse kabse pyaar karta hoon...",
+          "Main tumhe itna pyaar karunga... ki tum khud se pyaar karne lagogi.",
+          "Pyaar sirf ek baar hota hai..."
         ]
       },
       motivated: {
         shayari: [
-          "Manzil milegi, bhatak kar hi sahi,\nGumrah toh wo hain jo ghar se nikle hi nahi.",
-          "Har andhera roshan hoga,\nBas hausla zaroori hai."
+          "Haar ke jeetne wale ko Baazigar kehte hain.",
+          "Don ko pakadna mushkil hi nahi... namumkin hai.",
+          "Success ke peeche mat bhaago...",
+          "Mujhe states ke naam mat batao...",
+          "Main hoon Don."
         ],
         poem: [
-          "Rise and shine, break all chains,\nLet your courage light the lanes.",
-          "Dreams are wings, don’t fear the sky,\nYou were born to soar, to fly!"
+          "Haar ke jeetne wale ko Baazigar kehte hain.",
+          "Don ko pakadna mushkil hi nahi... namumkin hai.",
+          "Success ke peeche mat bhaago...",
+          "Mujhe states ke naam mat batao...",
+          "Main hoon Don."
         ],
         joke: [
-          "Success tip: Study like you’re dating your notes!",
-          "Motivation ka kya karein?\nJab tak chai na mile – kuch na karein! ☕"
+          "Haar ke jeetne wale ko Baazigar kehte hain.",
+          "Don ko pakadna mushkil hi nahi... namumkin hai.",
+          "Success ke peeche mat bhaago...",
+          "Mujhe states ke naam mat batao...",
+          "Main hoon Don."
         ]
       },
       funny: {
         shayari: [
-          "Dost ke jokes aise hote hain,\nNa hanso toh insult hoti hai!",
-          "Hasna hai toh aajaa,\nMera dost pagal banata hi rahega!"
+          "Yeh toh bada toing hai.",
+          "Main aisa kyun hoon? Kyunki main ek hero hoon!",
+          "Kaun kambakht bardaasht karne ko peeta hai?",
+          "Mujh par ek ehsaan karna, ki mujh par koi ehsaan na karna.",
+          "Rahul... naam toh suna hoga!"
         ],
         poem: [
-          "Tickle my ribs, I laugh till I fall,\nFriends like you – best gift of all!",
-          "Life is serious, that’s the rule,\nBut with you, I act the fool!"
+          "Yeh toh bada toing hai.",
+          "Main aisa kyun hoon? Kyunki main ek hero hoon!",
+          "Kaun kambakht bardaasht karne ko peeta hai?",
+          "Mujh par ek ehsaan karna, ki mujh par koi ehsaan na karna.",
+          "Rahul... naam toh suna hoga!"
         ],
         joke: [
-          "Teacher: Why are you late?\nStudent: Alarm ka mood off tha 😂",
-          "Pyar andha hota hai,\nPar jokes bina kaam ke nahi hote!"
+          "Yeh toh bada toing hai.",
+          "Main aisa kyun hoon? Kyunki main ek hero hoon!",
+          "Kaun kambakht bardaasht karne ko peeta hai?",
+          "Mujh par ek ehsaan karna, ki mujh par koi ehsaan na karna.",
+          "Rahul... naam toh suna hoga!"
         ]
       }
     };
@@ -264,7 +306,7 @@
       const text = document.getElementById("outputDisplay").innerText;
       if ('speechSynthesis' in window) {
         const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = "en-IN";
+        utterance.lang = "hi-IN";
         window.speechSynthesis.speak(utterance);
       } else {
         alert("Sorry, your browser does not support speech synthesis.");
